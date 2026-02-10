@@ -1,0 +1,81 @@
+// Prisma schema file
+// https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client"
+  output   = "../src/utils/prisma/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userRoles UserRole[] @relation("UserToRole")
+
+  @@map("user")
+}
+
+model Role {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userRoles UserRole[] @relation("UserToRole")
+  roleMenus RoleMenu[] @relation("RoleToMenu")
+
+  @@map("role")
+}
+
+model Menu {
+  id       String  @id @default(uuid())
+  name     String
+  parentId String?
+
+  parent   Menu?  @relation("MenuHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  children Menu[] @relation("MenuHierarchy")
+
+  roleMenus RoleMenu[] @relation("RoleToMenu")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([parentId, name])
+  @@map("menu")
+}
+
+model UserRole {
+  id     String @id @default(uuid())
+  userId String
+  roleId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation("UserToRole", fields: [userId], references: [id], onDelete: Cascade)
+  role Role @relation("UserToRole", fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roleId])
+  @@map("user_role")
+}
+
+model RoleMenu {
+  id     String @id @default(uuid())
+  roleId String
+  menuId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  role Role @relation("RoleToMenu", fields: [roleId], references: [id], onDelete: Cascade)
+  menu Menu @relation("RoleToMenu", fields: [menuId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, menuId])
+  @@map("role_menu")
+}

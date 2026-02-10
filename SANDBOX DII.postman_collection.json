@@ -1,0 +1,1540 @@
+{
+  "info": {
+    "_postman_id": "99c0dcbf-7e9e-46f5-848b-36222d464223",
+    "name": "SANDBOX DII",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "36023868"
+  },
+  "item": [
+    {
+      "name": "Api",
+      "item": [
+        {
+          "name": "Auth",
+          "item": [
+            {
+              "name": "Login",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const responseJson = pm.response.json();",
+                      "",
+                      "if (responseJson?.result.userId !== undefined) {",
+                      "pm.collectionVariables.set('userId', responseJson.result.userId);",
+                      "}",
+                      "",
+                      "if (responseJson?.result.roles[0].id !== undefined) {",
+                      "pm.collectionVariables.set('roleId', responseJson.result.roles[0].id);",
+                      "}",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"password\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/v1/auth/login",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "response": [
+                {
+                  "name": "Login",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"password\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/v1/auth/login",
+                      "host": ["{{base_url}}"],
+                      "path": ["api", "v1", "auth", "login"]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "238"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"ee-ZihJu3GG+d3xZNmS2prGH2uDGrQ\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 10 Feb 2026 09:40:49 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": 200,\n    \"message\": \"Get Data Successfully\",\n    \"result\": {\n        \"userId\": \"68181efe-5a47-474a-bdb0-1c21961e42d4\",\n        \"roles\": [\n            {\n                \"id\": \"130621a6-8dfa-45c6-b83e-c214fe002873\",\n                \"name\": \"ADMIN\"\n            },\n            {\n                \"id\": \"2dee480c-58ea-41c2-8bdd-b461119fcb45\",\n                \"name\": \"USER\"\n            }\n        ]\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Select Role",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const responseJson = pm.response.json();\r",
+                      "\r",
+                      "if (responseJson?.result.accessToken !== undefined) {\r",
+                      "pm.collectionVariables.set('dashboard_access_token', responseJson.result.accessToken);\r",
+                      "}\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"userId\" :\"{{userId}}\",\r\n    \"roleId\" : \"{{roleId}}\"\r\n}   ",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/v1/auth/select-role",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "v1", "auth", "select-role"]
+                }
+              },
+              "response": [
+                {
+                  "name": "Select Role",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"userId\" : \"68181efe-5a47-474a-bdb0-1c21961e42d4\",\r\n    \"roleId\" : \"130621a6-8dfa-45c6-b83e-c214fe002873\"\r\n}   ",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/v1/auth/select-role",
+                      "host": ["{{base_url}}"],
+                      "path": ["api", "v1", "auth", "select-role"]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "492"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"1ec-i/JZfFZMAnNwQJY8IVBvEW+F6xE\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 10 Feb 2026 09:40:52 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": 200,\n    \"message\": \"Get Data Successfully\",\n    \"result\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODE4MWVmZS01YTQ3LTQ3NGEtYmRiMC0xYzIxOTYxZTQyZDQiLCJyb2xlSWQiOiIxMzA2MjFhNi04ZGZhLTQ1YzYtYjgzZS1jMjE0ZmUwMDI4NzMiLCJyb2xlTmFtZSI6IkFETUlOIiwiaWF0IjoxNzcwNzE2NDUyLCJleHAiOjE3NzA3MjAwNTJ9.kQYwWuu1yiiRhBSLhi0Tawx7ZiTAeUN4AfjLBReIhZ0\",\n        \"user\": {\n            \"id\": \"68181efe-5a47-474a-bdb0-1c21961e42d4\",\n            \"activeRole\": {\n                \"roleId\": \"130621a6-8dfa-45c6-b83e-c214fe002873\",\n                \"roleName\": \"ADMIN\"\n            }\n        }\n    }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Menu",
+          "item": [
+            {
+              "name": "list",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/v1/menu",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "v1", "menu"]
+                }
+              },
+              "response": [
+                {
+                  "name": "list",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": ""
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/v1/menu",
+                      "host": ["{{base_url}}"],
+                      "path": ["api", "v1", "menu"]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "4922"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"133a-uEgwXDJPIqkFWQyJ+KHEOtEN9Pk\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 10 Feb 2026 09:41:06 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": 200,\n    \"message\": \"Get Data Successfully\",\n    \"result\": [\n        {\n            \"id\": \"62a75e76-60bd-411d-80b5-0e493d8cfd31\",\n            \"name\": \"Menu 1\",\n            \"parentId\": null,\n            \"createdAt\": \"2026-02-10T05:38:46.590Z\",\n            \"updatedAt\": \"2026-02-10T05:38:46.590Z\",\n            \"children\": [\n                {\n                    \"id\": \"bfa86eca-9ae4-46ab-8a7a-b27693c21c48\",\n                    \"name\": \"Menu 1.1\",\n                    \"parentId\": \"62a75e76-60bd-411d-80b5-0e493d8cfd31\",\n                    \"createdAt\": \"2026-02-10T05:38:46.593Z\",\n                    \"updatedAt\": \"2026-02-10T05:38:46.593Z\",\n                    \"children\": []\n                },\n                {\n                    \"id\": \"4aab8c10-47ef-49f4-81a8-3b8e6ac4a179\",\n                    \"name\": \"Menu 1.2\",\n                    \"parentId\": \"62a75e76-60bd-411d-80b5-0e493d8cfd31\",\n                    \"createdAt\": \"2026-02-10T05:38:46.594Z\",\n                    \"updatedAt\": \"2026-02-10T05:38:46.594Z\",\n                    \"children\": [\n                        {\n                            \"id\": \"80f7dd6f-5daa-4ede-a9f4-758623dff30a\",\n                            \"name\": \"Menu 1.2.1\",\n                            \"parentId\": \"4aab8c10-47ef-49f4-81a8-3b8e6ac4a179\",\n                            \"createdAt\": \"2026-02-10T05:38:46.595Z\",\n                            \"updatedAt\": \"2026-02-10T05:38:46.595Z\",\n                            \"children\": []\n                        },\n                        {\n                            \"id\": \"932b8ef9-cbab-4605-bbcd-79ffe9644fad\",\n                            \"name\": \"Menu 1.2.2\",\n                            \"parentId\": \"4aab8c10-47ef-49f4-81a8-3b8e6ac4a179\",\n                            \"createdAt\": \"2026-02-10T05:38:46.596Z\",\n                            \"updatedAt\": \"2026-02-10T05:38:46.596Z\",\n                            \"children\": [\n                                {\n                                    \"id\": \"0dc13f26-cce2-45a5-86f8-51aa889418c6\",\n                                    \"name\": \"Menu 1.2.2.1\",\n                                    \"parentId\": \"932b8ef9-cbab-4605-bbcd-79ffe9644fad\",\n                                    \"createdAt\": \"2026-02-10T05:38:46.598Z\",\n                                    \"updatedAt\": \"2026-02-10T05:38:46.598Z\",\n                                    \"children\": []\n                                },\n                                {\n                                    \"id\": \"c02d3dee-6ebe-4cdb-9dac-7f9f6bdde1bc\",\n                                    \"name\": \"Menu 1.2.2.2\",\n                                    \"parentId\": \"932b8ef9-cbab-4605-bbcd-79ffe9644fad\",\n                                    \"createdAt\": \"2026-02-10T05:38:46.599Z\",\n                                    \"updatedAt\": \"2026-02-10T05:38:46.599Z\",\n                                    \"children\": []\n                                }\n                            ]\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"34f3cb89-ad0f-436f-a562-312bc749e5f2\",\n                    \"name\": \"Menu 1.3\",\n                    \"parentId\": \"62a75e76-60bd-411d-80b5-0e493d8cfd31\",\n                    \"createdAt\": \"2026-02-10T05:38:46.600Z\",\n                    \"updatedAt\": \"2026-02-10T05:38:46.600Z\",\n                    \"children\": [\n                        {\n                            \"id\": \"b2e52b9c-8c7d-4327-a5d4-f0fb3eba9514\",\n                            \"name\": \"Menu 1.3.1\",\n                            \"parentId\": \"34f3cb89-ad0f-436f-a562-312bc749e5f2\",\n                            \"createdAt\": \"2026-02-10T05:38:46.602Z\",\n                            \"updatedAt\": \"2026-02-10T05:38:46.602Z\",\n                            \"children\": [\n                                {\n                                    \"id\": \"5f15e6d2-9828-4bae-a248-1a8002780c2c\",\n                                    \"name\": \"Menu 1.3.1.1\",\n                                    \"parentId\": \"b2e52b9c-8c7d-4327-a5d4-f0fb3eba9514\",\n                                    \"createdAt\": \"2026-02-10T05:38:46.603Z\",\n                                    \"updatedAt\": \"2026-02-10T05:38:46.603Z\",\n                                    \"children\": []\n                                }\n                            ]\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"f39efd4b-9701-4520-a038-fcf3e83aab2e\",\n            \"name\": \"Menu 2\",\n            \"parentId\": null,\n            \"createdAt\": \"2026-02-10T05:38:46.605Z\",\n            \"updatedAt\": \"2026-02-10T05:38:46.605Z\",\n            \"children\": [\n                {\n                    \"id\": \"28f1fb31-082e-4c48-a640-d352407a2aa3\",\n                    \"name\": \"Menu 2.1\",\n                    \"parentId\": \"f39efd4b-9701-4520-a038-fcf3e83aab2e\",\n                    \"createdAt\": \"2026-02-10T05:38:46.606Z\",\n                    \"updatedAt\": \"2026-02-10T05:38:46.606Z\",\n                    \"children\": []\n                },\n                {\n                    \"id\": \"09d36e41-0524-495f-a764-00d0b40b9ffb\",\n                    \"name\": \"Menu 2.2\",\n                    \"parentId\": \"f39efd4b-9701-4520-a038-fcf3e83aab2e\",\n                    \"createdAt\": \"2026-02-10T05:38:46.607Z\",\n                    \"updatedAt\": \"2026-02-10T05:38:46.607Z\",\n                    \"children\": [\n                        {\n                            \"id\": \"25760f98-bcb5-4896-97dc-1d3960a325ed\",\n                            \"name\": \"Menu 2.2.1\",\n                            \"parentId\": \"09d36e41-0524-495f-a764-00d0b40b9ffb\",\n                            \"createdAt\": \"2026-02-10T05:38:46.609Z\",\n                            \"updatedAt\": \"2026-02-10T05:38:46.609Z\",\n                            \"children\": []\n                        },\n                        {\n                            \"id\": \"2e773ed5-030e-4160-a7c3-b259399249c7\",\n                            \"name\": \"Menu 2.2.2\",\n                            \"parentId\": \"09d36e41-0524-495f-a764-00d0b40b9ffb\",\n                            \"createdAt\": \"2026-02-10T05:38:46.610Z\",\n                            \"updatedAt\": \"2026-02-10T05:38:46.610Z\",\n                            \"children\": [\n                                {\n                                    \"id\": \"2cd1a912-efa1-4d60-81a2-5d4b0fced50e\",\n                                    \"name\": \"Menu 2.2.2.1\",\n                                    \"parentId\": \"2e773ed5-030e-4160-a7c3-b259399249c7\",\n                                    \"createdAt\": \"2026-02-10T05:38:46.611Z\",\n                                    \"updatedAt\": \"2026-02-10T05:38:46.611Z\",\n                                    \"children\": []\n                                },\n                                {\n                                    \"id\": \"395bb3ac-e70c-4a23-943b-56dbed078eed\",\n                                    \"name\": \"Menu 2.2.2.2\",\n                                    \"parentId\": \"2e773ed5-030e-4160-a7c3-b259399249c7\",\n                                    \"createdAt\": \"2026-02-10T05:38:46.613Z\",\n                                    \"updatedAt\": \"2026-02-10T05:38:46.613Z\",\n                                    \"children\": []\n                                }\n                            ]\n                        },\n                        {\n                            \"id\": \"d111c062-27d9-4e22-8d78-95ea07b11d81\",\n                            \"name\": \"Menu 2.2.3\",\n                            \"parentId\": \"09d36e41-0524-495f-a764-00d0b40b9ffb\",\n                            \"createdAt\": \"2026-02-10T05:38:46.614Z\",\n                            \"updatedAt\": \"2026-02-10T05:38:46.614Z\",\n                            \"children\": [\n                                {\n                                    \"id\": \"f83b5418-df42-485b-bc63-dcee3d276fe1\",\n                                    \"name\": \"Menu 2.2.3.1\",\n                                    \"parentId\": \"d111c062-27d9-4e22-8d78-95ea07b11d81\",\n                                    \"createdAt\": \"2026-02-10T05:38:46.615Z\",\n                                    \"updatedAt\": \"2026-02-10T05:38:46.615Z\",\n                                    \"children\": []\n                                }\n                            ]\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"78645f64-c71d-4653-997d-df3aca3ba58e\",\n                    \"name\": \"Menu 2.3\",\n                    \"parentId\": \"f39efd4b-9701-4520-a038-fcf3e83aab2e\",\n                    \"createdAt\": \"2026-02-10T05:38:46.616Z\",\n                    \"updatedAt\": \"2026-02-10T05:38:46.616Z\",\n                    \"children\": []\n                }\n            ]\n        },\n        {\n            \"id\": \"8bbd1ddb-1cf7-426e-8cbf-66ecedae052d\",\n            \"name\": \"Menu 3\",\n            \"parentId\": null,\n            \"createdAt\": \"2026-02-10T05:38:46.617Z\",\n            \"updatedAt\": \"2026-02-10T05:38:46.617Z\",\n            \"children\": [\n                {\n                    \"id\": \"5e844378-a7fb-4987-b72b-7a813a0158c7\",\n                    \"name\": \"Menu 3.1\",\n                    \"parentId\": \"8bbd1ddb-1cf7-426e-8cbf-66ecedae052d\",\n                    \"createdAt\": \"2026-02-10T05:38:46.618Z\",\n                    \"updatedAt\": \"2026-02-10T05:38:46.618Z\",\n                    \"children\": []\n                },\n                {\n                    \"id\": \"b140fa57-7be7-46ac-acac-637420b1bb23\",\n                    \"name\": \"Menu 3.2\",\n                    \"parentId\": \"8bbd1ddb-1cf7-426e-8cbf-66ecedae052d\",\n                    \"createdAt\": \"2026-02-10T05:38:46.620Z\",\n                    \"updatedAt\": \"2026-02-10T05:38:46.620Z\",\n                    \"children\": [\n                        {\n                            \"id\": \"3cc80d6f-43c2-4465-a7b0-9b0d8eb2737b\",\n                            \"name\": \"Menu 3.2.1\",\n                            \"parentId\": \"b140fa57-7be7-46ac-acac-637420b1bb23\",\n                            \"createdAt\": \"2026-02-10T05:38:46.621Z\",\n                            \"updatedAt\": \"2026-02-10T05:38:46.621Z\",\n                            \"children\": []\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "create",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\" : \"ABC XYZ\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/v1/menu",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "v1", "menu"]
+                }
+              },
+              "response": [
+                {
+                  "name": "store",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"name\" : \"ABC XYZ\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/v1/menu",
+                      "host": ["{{base_url}}"],
+                      "path": ["api", "v1", "menu"]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "214"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"d6-bYDztymbySJznkXw8INxC9aGBWk\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 10 Feb 2026 09:42:34 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": 200,\n    \"message\": \"Get Data Successfully\",\n    \"result\": {\n        \"id\": \"f4ca287d-9a3b-4227-9493-3b8248f7ae9e\",\n        \"name\": \"ABC XYZ\",\n        \"parentId\": null,\n        \"createdAt\": \"2026-02-10T09:42:34.184Z\",\n        \"updatedAt\": \"2026-02-10T09:42:34.184Z\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "role menu",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/v1/menu/role/:code",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "v1", "menu", "role", ":code"],
+                  "variable": [
+                    {
+                      "key": "code",
+                      "value": "130621a6-8dfa-45c6-b83e-c214fe002873"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "detail",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": ""
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/v1/menu/role/:code",
+                      "host": ["{{base_url}}"],
+                      "path": ["api", "v1", "menu", "role", ":code"],
+                      "variable": [
+                        {
+                          "key": "code",
+                          "value": "130621a6-8dfa-45c6-b83e-c214fe002873"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "4922"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"133a-uEgwXDJPIqkFWQyJ+KHEOtEN9Pk\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 10 Feb 2026 09:45:13 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": 200,\n    \"message\": \"Get Data Successfully\",\n    \"result\": [\n        {\n            \"id\": \"62a75e76-60bd-411d-80b5-0e493d8cfd31\",\n            \"name\": \"Menu 1\",\n            \"parentId\": null,\n            \"createdAt\": \"2026-02-10T05:38:46.590Z\",\n            \"updatedAt\": \"2026-02-10T05:38:46.590Z\",\n            \"children\": [\n                {\n                    \"id\": \"bfa86eca-9ae4-46ab-8a7a-b27693c21c48\",\n                    \"name\": \"Menu 1.1\",\n                    \"parentId\": \"62a75e76-60bd-411d-80b5-0e493d8cfd31\",\n                    \"createdAt\": \"2026-02-10T05:38:46.593Z\",\n                    \"updatedAt\": \"2026-02-10T05:38:46.593Z\",\n                    \"children\": []\n                },\n                {\n                    \"id\": \"4aab8c10-47ef-49f4-81a8-3b8e6ac4a179\",\n                    \"name\": \"Menu 1.2\",\n                    \"parentId\": \"62a75e76-60bd-411d-80b5-0e493d8cfd31\",\n                    \"createdAt\": \"2026-02-10T05:38:46.594Z\",\n                    \"updatedAt\": \"2026-02-10T05:38:46.594Z\",\n                    \"children\": [\n                        {\n                            \"id\": \"80f7dd6f-5daa-4ede-a9f4-758623dff30a\",\n                            \"name\": \"Menu 1.2.1\",\n                            \"parentId\": \"4aab8c10-47ef-49f4-81a8-3b8e6ac4a179\",\n                            \"createdAt\": \"2026-02-10T05:38:46.595Z\",\n                            \"updatedAt\": \"2026-02-10T05:38:46.595Z\",\n                            \"children\": []\n                        },\n                        {\n                            \"id\": \"932b8ef9-cbab-4605-bbcd-79ffe9644fad\",\n                            \"name\": \"Menu 1.2.2\",\n                            \"parentId\": \"4aab8c10-47ef-49f4-81a8-3b8e6ac4a179\",\n                            \"createdAt\": \"2026-02-10T05:38:46.596Z\",\n                            \"updatedAt\": \"2026-02-10T05:38:46.596Z\",\n                            \"children\": [\n                                {\n                                    \"id\": \"0dc13f26-cce2-45a5-86f8-51aa889418c6\",\n                                    \"name\": \"Menu 1.2.2.1\",\n                                    \"parentId\": \"932b8ef9-cbab-4605-bbcd-79ffe9644fad\",\n                                    \"createdAt\": \"2026-02-10T05:38:46.598Z\",\n                                    \"updatedAt\": \"2026-02-10T05:38:46.598Z\",\n                                    \"children\": []\n                                },\n                                {\n                                    \"id\": \"c02d3dee-6ebe-4cdb-9dac-7f9f6bdde1bc\",\n                                    \"name\": \"Menu 1.2.2.2\",\n                                    \"parentId\": \"932b8ef9-cbab-4605-bbcd-79ffe9644fad\",\n                                    \"createdAt\": \"2026-02-10T05:38:46.599Z\",\n                                    \"updatedAt\": \"2026-02-10T05:38:46.599Z\",\n                                    \"children\": []\n                                }\n                            ]\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"34f3cb89-ad0f-436f-a562-312bc749e5f2\",\n                    \"name\": \"Menu 1.3\",\n                    \"parentId\": \"62a75e76-60bd-411d-80b5-0e493d8cfd31\",\n                    \"createdAt\": \"2026-02-10T05:38:46.600Z\",\n                    \"updatedAt\": \"2026-02-10T05:38:46.600Z\",\n                    \"children\": [\n                        {\n                            \"id\": \"b2e52b9c-8c7d-4327-a5d4-f0fb3eba9514\",\n                            \"name\": \"Menu 1.3.1\",\n                            \"parentId\": \"34f3cb89-ad0f-436f-a562-312bc749e5f2\",\n                            \"createdAt\": \"2026-02-10T05:38:46.602Z\",\n                            \"updatedAt\": \"2026-02-10T05:38:46.602Z\",\n                            \"children\": [\n                                {\n                                    \"id\": \"5f15e6d2-9828-4bae-a248-1a8002780c2c\",\n                                    \"name\": \"Menu 1.3.1.1\",\n                                    \"parentId\": \"b2e52b9c-8c7d-4327-a5d4-f0fb3eba9514\",\n                                    \"createdAt\": \"2026-02-10T05:38:46.603Z\",\n                                    \"updatedAt\": \"2026-02-10T05:38:46.603Z\",\n                                    \"children\": []\n                                }\n                            ]\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"id\": \"f39efd4b-9701-4520-a038-fcf3e83aab2e\",\n            \"name\": \"Menu 2\",\n            \"parentId\": null,\n            \"createdAt\": \"2026-02-10T05:38:46.605Z\",\n            \"updatedAt\": \"2026-02-10T05:38:46.605Z\",\n            \"children\": [\n                {\n                    \"id\": \"28f1fb31-082e-4c48-a640-d352407a2aa3\",\n                    \"name\": \"Menu 2.1\",\n                    \"parentId\": \"f39efd4b-9701-4520-a038-fcf3e83aab2e\",\n                    \"createdAt\": \"2026-02-10T05:38:46.606Z\",\n                    \"updatedAt\": \"2026-02-10T05:38:46.606Z\",\n                    \"children\": []\n                },\n                {\n                    \"id\": \"09d36e41-0524-495f-a764-00d0b40b9ffb\",\n                    \"name\": \"Menu 2.2\",\n                    \"parentId\": \"f39efd4b-9701-4520-a038-fcf3e83aab2e\",\n                    \"createdAt\": \"2026-02-10T05:38:46.607Z\",\n                    \"updatedAt\": \"2026-02-10T05:38:46.607Z\",\n                    \"children\": [\n                        {\n                            \"id\": \"25760f98-bcb5-4896-97dc-1d3960a325ed\",\n                            \"name\": \"Menu 2.2.1\",\n                            \"parentId\": \"09d36e41-0524-495f-a764-00d0b40b9ffb\",\n                            \"createdAt\": \"2026-02-10T05:38:46.609Z\",\n                            \"updatedAt\": \"2026-02-10T05:38:46.609Z\",\n                            \"children\": []\n                        },\n                        {\n                            \"id\": \"2e773ed5-030e-4160-a7c3-b259399249c7\",\n                            \"name\": \"Menu 2.2.2\",\n                            \"parentId\": \"09d36e41-0524-495f-a764-00d0b40b9ffb\",\n                            \"createdAt\": \"2026-02-10T05:38:46.610Z\",\n                            \"updatedAt\": \"2026-02-10T05:38:46.610Z\",\n                            \"children\": [\n                                {\n                                    \"id\": \"2cd1a912-efa1-4d60-81a2-5d4b0fced50e\",\n                                    \"name\": \"Menu 2.2.2.1\",\n                                    \"parentId\": \"2e773ed5-030e-4160-a7c3-b259399249c7\",\n                                    \"createdAt\": \"2026-02-10T05:38:46.611Z\",\n                                    \"updatedAt\": \"2026-02-10T05:38:46.611Z\",\n                                    \"children\": []\n                                },\n                                {\n                                    \"id\": \"395bb3ac-e70c-4a23-943b-56dbed078eed\",\n                                    \"name\": \"Menu 2.2.2.2\",\n                                    \"parentId\": \"2e773ed5-030e-4160-a7c3-b259399249c7\",\n                                    \"createdAt\": \"2026-02-10T05:38:46.613Z\",\n                                    \"updatedAt\": \"2026-02-10T05:38:46.613Z\",\n                                    \"children\": []\n                                }\n                            ]\n                        },\n                        {\n                            \"id\": \"d111c062-27d9-4e22-8d78-95ea07b11d81\",\n                            \"name\": \"Menu 2.2.3\",\n                            \"parentId\": \"09d36e41-0524-495f-a764-00d0b40b9ffb\",\n                            \"createdAt\": \"2026-02-10T05:38:46.614Z\",\n                            \"updatedAt\": \"2026-02-10T05:38:46.614Z\",\n                            \"children\": [\n                                {\n                                    \"id\": \"f83b5418-df42-485b-bc63-dcee3d276fe1\",\n                                    \"name\": \"Menu 2.2.3.1\",\n                                    \"parentId\": \"d111c062-27d9-4e22-8d78-95ea07b11d81\",\n                                    \"createdAt\": \"2026-02-10T05:38:46.615Z\",\n                                    \"updatedAt\": \"2026-02-10T05:38:46.615Z\",\n                                    \"children\": []\n                                }\n                            ]\n                        }\n                    ]\n                },\n                {\n                    \"id\": \"78645f64-c71d-4653-997d-df3aca3ba58e\",\n                    \"name\": \"Menu 2.3\",\n                    \"parentId\": \"f39efd4b-9701-4520-a038-fcf3e83aab2e\",\n                    \"createdAt\": \"2026-02-10T05:38:46.616Z\",\n                    \"updatedAt\": \"2026-02-10T05:38:46.616Z\",\n                    \"children\": []\n                }\n            ]\n        },\n        {\n            \"id\": \"8bbd1ddb-1cf7-426e-8cbf-66ecedae052d\",\n            \"name\": \"Menu 3\",\n            \"parentId\": null,\n            \"createdAt\": \"2026-02-10T05:38:46.617Z\",\n            \"updatedAt\": \"2026-02-10T05:38:46.617Z\",\n            \"children\": [\n                {\n                    \"id\": \"5e844378-a7fb-4987-b72b-7a813a0158c7\",\n                    \"name\": \"Menu 3.1\",\n                    \"parentId\": \"8bbd1ddb-1cf7-426e-8cbf-66ecedae052d\",\n                    \"createdAt\": \"2026-02-10T05:38:46.618Z\",\n                    \"updatedAt\": \"2026-02-10T05:38:46.618Z\",\n                    \"children\": []\n                },\n                {\n                    \"id\": \"b140fa57-7be7-46ac-acac-637420b1bb23\",\n                    \"name\": \"Menu 3.2\",\n                    \"parentId\": \"8bbd1ddb-1cf7-426e-8cbf-66ecedae052d\",\n                    \"createdAt\": \"2026-02-10T05:38:46.620Z\",\n                    \"updatedAt\": \"2026-02-10T05:38:46.620Z\",\n                    \"children\": [\n                        {\n                            \"id\": \"3cc80d6f-43c2-4465-a7b0-9b0d8eb2737b\",\n                            \"name\": \"Menu 3.2.1\",\n                            \"parentId\": \"b140fa57-7be7-46ac-acac-637420b1bb23\",\n                            \"createdAt\": \"2026-02-10T05:38:46.621Z\",\n                            \"updatedAt\": \"2026-02-10T05:38:46.621Z\",\n                            \"children\": []\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "edit",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\" : \"ABC XYZ 2\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/v1/menu/:code",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "v1", "menu", ":code"],
+                  "variable": [
+                    {
+                      "key": "code",
+                      "value": "f4ca287d-9a3b-4227-9493-3b8248f7ae9e"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "edit",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"name\" : \"ABC XYZ 2\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/v1/menu/:code",
+                      "host": ["{{base_url}}"],
+                      "path": ["api", "v1", "menu", ":code"],
+                      "variable": [
+                        {
+                          "key": "code",
+                          "value": "f4ca287d-9a3b-4227-9493-3b8248f7ae9e"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "216"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"d8-5N672PC3MacOumDB3ZL/T3oY2Sg\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 10 Feb 2026 09:43:26 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": 200,\n    \"message\": \"Get Data Successfully\",\n    \"result\": {\n        \"id\": \"f4ca287d-9a3b-4227-9493-3b8248f7ae9e\",\n        \"name\": \"ABC XYZ 2\",\n        \"parentId\": null,\n        \"createdAt\": \"2026-02-10T09:42:34.184Z\",\n        \"updatedAt\": \"2026-02-10T09:43:26.283Z\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "delete",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/v1/menu/:code",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "v1", "menu", ":code"],
+                  "variable": [
+                    {
+                      "key": "code",
+                      "value": "f4ca287d-9a3b-4227-9493-3b8248f7ae9e"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "edit",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"name\" : \"ABC XYZ 2\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/v1/menu/:code",
+                      "host": ["{{base_url}}"],
+                      "path": ["api", "v1", "menu", ":code"],
+                      "variable": [
+                        {
+                          "key": "code",
+                          "value": "f4ca287d-9a3b-4227-9493-3b8248f7ae9e"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "216"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"d8-5N672PC3MacOumDB3ZL/T3oY2Sg\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 10 Feb 2026 09:43:26 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": 200,\n    \"message\": \"Get Data Successfully\",\n    \"result\": {\n        \"id\": \"f4ca287d-9a3b-4227-9493-3b8248f7ae9e\",\n        \"name\": \"ABC XYZ 2\",\n        \"parentId\": null,\n        \"createdAt\": \"2026-02-10T09:42:34.184Z\",\n        \"updatedAt\": \"2026-02-10T09:43:26.283Z\"\n    }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Role",
+          "item": [
+            {
+              "name": "list",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/v1/roles",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "v1", "roles"]
+                }
+              },
+              "response": [
+                {
+                  "name": "list",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": ""
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/v1/roles",
+                      "host": ["{{base_url}}"],
+                      "path": ["api", "v1", "roles"]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "477"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"1dd-i9JnFQdrNvzbv1atxAm1J9BM8Cg\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 10 Feb 2026 09:50:20 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": 200,\n    \"message\": \"Get Data Successfully\",\n    \"result\": [\n        {\n            \"id\": \"130621a6-8dfa-45c6-b83e-c214fe002873\",\n            \"name\": \"ADMIN\",\n            \"createdAt\": \"2026-02-10T05:38:46.467Z\",\n            \"updatedAt\": \"2026-02-10T05:38:46.467Z\"\n        },\n        {\n            \"id\": \"2dee480c-58ea-41c2-8bdd-b461119fcb45\",\n            \"name\": \"USER\",\n            \"createdAt\": \"2026-02-10T05:38:46.501Z\",\n            \"updatedAt\": \"2026-02-10T05:38:46.501Z\"\n        },\n        {\n            \"id\": \"36a4352f-ce75-45f8-83dc-318d93019a6e\",\n            \"name\": \"ABC XYZ\",\n            \"createdAt\": \"2026-02-10T09:50:16.276Z\",\n            \"updatedAt\": \"2026-02-10T09:50:16.276Z\"\n        }\n    ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "detail",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/v1/roles/130621a6-8dfa-45c6-b83e-c214fe002873",
+                  "host": ["{{base_url}}"],
+                  "path": [
+                    "api",
+                    "v1",
+                    "roles",
+                    "130621a6-8dfa-45c6-b83e-c214fe002873"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "detail",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": ""
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/v1/roles/130621a6-8dfa-45c6-b83e-c214fe002873",
+                      "host": ["{{base_url}}"],
+                      "path": [
+                        "api",
+                        "v1",
+                        "roles",
+                        "130621a6-8dfa-45c6-b83e-c214fe002873"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "196"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"c4-UWnIRZxqgQ8i+wSEJP3s7yiJov8\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 10 Feb 2026 09:49:42 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": 200,\n    \"message\": \"Get Data Successfully\",\n    \"result\": {\n        \"id\": \"130621a6-8dfa-45c6-b83e-c214fe002873\",\n        \"name\": \"ADMIN\",\n        \"createdAt\": \"2026-02-10T05:38:46.467Z\",\n        \"updatedAt\": \"2026-02-10T05:38:46.467Z\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "create",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\" : \"ABC XYZ\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/v1/roles",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "v1", "roles"]
+                }
+              },
+              "response": [
+                {
+                  "name": "create",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"name\" : \"ABC XYZ\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/v1/roles",
+                      "host": ["{{base_url}}"],
+                      "path": ["api", "v1", "roles"]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "198"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"c6-WYnoXrrM9F1J2TUD7ficsMJWQt8\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 10 Feb 2026 09:50:16 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": 200,\n    \"message\": \"Get Data Successfully\",\n    \"result\": {\n        \"id\": \"36a4352f-ce75-45f8-83dc-318d93019a6e\",\n        \"name\": \"ABC XYZ\",\n        \"createdAt\": \"2026-02-10T09:50:16.276Z\",\n        \"updatedAt\": \"2026-02-10T09:50:16.276Z\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "assign menu",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"menuId\": \"d54c75e9-0e7d-4f36-b05c-5d2dd05ae6bc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/v1/roles/:roleId/menus",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "v1", "roles", ":roleId", "menus"],
+                  "variable": [
+                    {
+                      "key": "roleId",
+                      "value": "130621a6-8dfa-45c6-b83e-c214fe002873"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "assign menu",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"menuId\": \"d54c75e9-0e7d-4f36-b05c-5d2dd05ae6bc\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/v1/roles/:roleId/menus",
+                      "host": ["{{base_url}}"],
+                      "path": ["api", "v1", "roles", ":roleId", "menus"],
+                      "variable": [
+                        {
+                          "key": "roleId",
+                          "value": "130621a6-8dfa-45c6-b83e-c214fe002873"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "93"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"5d-h1Y6HtJzTUUtWYk8ikVPmysQW50\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 10 Feb 2026 09:58:38 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": 200,\n    \"message\": \"Get Data Successfully\",\n    \"result\": {\n        \"message\": \"Menu assigned to role\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "assign user",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"userId\": \"32111447-c3a4-4f58-8098-1396c3c635f6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/v1/roles/:roleId/users",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "v1", "roles", ":roleId", "users"],
+                  "variable": [
+                    {
+                      "key": "roleId",
+                      "value": "fbdff7c6-27bc-4cb2-8176-bb6a00523835"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "assign user",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"userId\": \"32111447-c3a4-4f58-8098-1396c3c635f6\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/v1/roles/:roleId/users",
+                      "host": ["{{base_url}}"],
+                      "path": ["api", "v1", "roles", ":roleId", "users"],
+                      "variable": [
+                        {
+                          "key": "roleId",
+                          "value": "fbdff7c6-27bc-4cb2-8176-bb6a00523835"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "93"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"5d-vSlwd4l3Ifn9ks2eDkoXbLQnCAo\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 10 Feb 2026 10:11:38 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": 200,\n    \"message\": \"Get Data Successfully\",\n    \"result\": {\n        \"message\": \"User assigned to role\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "remove assign user",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/v1/roles/:roleId/users/:userId",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "v1", "roles", ":roleId", "users", ":userId"],
+                  "variable": [
+                    {
+                      "key": "roleId",
+                      "value": "fbdff7c6-27bc-4cb2-8176-bb6a00523835"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "32111447-c3a4-4f58-8098-1396c3c635f6"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "remove assign user",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/v1/roles/:roleId/users/:userId",
+                      "host": ["{{base_url}}"],
+                      "path": [
+                        "api",
+                        "v1",
+                        "roles",
+                        ":roleId",
+                        "users",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "roleId",
+                          "value": "fbdff7c6-27bc-4cb2-8176-bb6a00523835"
+                        },
+                        {
+                          "key": "userId",
+                          "value": "32111447-c3a4-4f58-8098-1396c3c635f6"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "94"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"5e-AUScLXz51gUnPUsP+kwjqqhi0Ww\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 10 Feb 2026 10:19:55 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": 200,\n    \"message\": \"Get Data Successfully\",\n    \"result\": {\n        \"message\": \"User removed from role\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "remove menu",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/v1/roles/:roleId/menus/:menusId",
+                  "host": ["{{base_url}}"],
+                  "path": [
+                    "api",
+                    "v1",
+                    "roles",
+                    ":roleId",
+                    "menus",
+                    ":menusId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "roleId",
+                      "value": "130621a6-8dfa-45c6-b83e-c214fe002873"
+                    },
+                    {
+                      "key": "menusId",
+                      "value": "d54c75e9-0e7d-4f36-b05c-5d2dd05ae6bc"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "assign User",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"userId\": \"d54c75e9-0e7d-4f36-b05c-5d2dd05ae6bc\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/v1/roles/:roleId/menus/:menusId",
+                      "host": ["{{base_url}}"],
+                      "path": [
+                        "api",
+                        "v1",
+                        "roles",
+                        ":roleId",
+                        "menus",
+                        ":menusId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "roleId",
+                          "value": "130621a6-8dfa-45c6-b83e-c214fe002873"
+                        },
+                        {
+                          "key": "menusId",
+                          "value": "d54c75e9-0e7d-4f36-b05c-5d2dd05ae6bc"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "94"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"5e-5R6kSzH3+1+hADiKbFVeAC8b1QU\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 10 Feb 2026 10:00:00 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": 200,\n    \"message\": \"Get Data Successfully\",\n    \"result\": {\n        \"message\": \"Menu removed from role\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "edit",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\" : \"ABC XYZ 2\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/v1/roles/:code",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "v1", "roles", ":code"],
+                  "variable": [
+                    {
+                      "key": "code",
+                      "value": "36a4352f-ce75-45f8-83dc-318d93019a6e"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "edit",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"name\" : \"ABC XYZ 2\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/v1/roles/:code",
+                      "host": ["{{base_url}}"],
+                      "path": ["api", "v1", "roles", ":code"],
+                      "variable": [
+                        {
+                          "key": "code",
+                          "value": "36a4352f-ce75-45f8-83dc-318d93019a6e"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "200"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"c8-qkq0hJDIBYNe4iCb623Q3b1yZyA\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 10 Feb 2026 09:52:09 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": 200,\n    \"message\": \"Get Data Successfully\",\n    \"result\": {\n        \"id\": \"36a4352f-ce75-45f8-83dc-318d93019a6e\",\n        \"name\": \"ABC XYZ 2\",\n        \"createdAt\": \"2026-02-10T09:50:16.276Z\",\n        \"updatedAt\": \"2026-02-10T09:52:09.323Z\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "delete",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/v1/roles/:code",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "v1", "roles", ":code"],
+                  "variable": [
+                    {
+                      "key": "code",
+                      "value": "36a4352f-ce75-45f8-83dc-318d93019a6e"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "delete",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/v1/roles/:code",
+                      "host": ["{{base_url}}"],
+                      "path": ["api", "v1", "roles", ":code"],
+                      "variable": [
+                        {
+                          "key": "code",
+                          "value": "36a4352f-ce75-45f8-83dc-318d93019a6e"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "97"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"61-tS0cY100gXkrGujfG15iwwpDaQ0\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 10 Feb 2026 09:52:29 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": 200,\n    \"message\": \"Get Data Successfully\",\n    \"result\": {\n        \"message\": \"Role deleted successfully\"\n    }\n}"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{dashboard_access_token}}",
+            "type": "string"
+          }
+        ]
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "exec": [""]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "exec": [""]
+          }
+        }
+      ]
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          "pm.request.headers.add({\r",
+          "    key: 'Accept',\r",
+          "    value: 'application/json'\r",
+          "});"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://sandbox.dibuiltadi.com"
+    },
+    {
+      "key": "dashboard_access_token",
+      "value": ""
+    },
+    {
+      "key": "userId",
+      "value": ""
+    },
+    {
+      "key": "roleId",
+      "value": ""
+    }
+  ]
+}

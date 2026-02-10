@@ -1,0 +1,28 @@
+import { Router } from "express";
+import { RoleController } from "../controllers/role.controller.js";
+import { authenticate } from "../middlewares/auth.middleware.js";
+
+const router = Router();
+const roleController = new RoleController();
+
+router.post("/", authenticate, roleController.create);
+router.get("/", authenticate, roleController.getAll);
+router.get("/:id", authenticate, roleController.getById);
+router.put("/:id", authenticate, roleController.update);
+router.delete("/:id", authenticate, roleController.delete);
+
+router.post("/:roleId/menus", authenticate, roleController.assignMenu);
+router.delete(
+  "/:roleId/menus/:menuId",
+  authenticate,
+  roleController.removeMenu,
+);
+
+router.post("/:roleId/users", authenticate, roleController.assignUser);
+router.delete(
+  "/:roleId/users/:userId",
+  authenticate,
+  roleController.removeUser,
+);
+
+export default router;
